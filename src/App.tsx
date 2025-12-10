@@ -1,11 +1,36 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
+import { Login } from "./pages/Login/Login";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
-function App() {
-
+export default function App() {
   return (
-    <>
-      <h1>Ola</h1>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
-export default App
+        {/* Private Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Redirect default */}
+        <Route path="*" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+}
