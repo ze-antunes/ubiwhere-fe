@@ -1,17 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
-import { useEarthquakes } from "../../hooks/useEarthquakes";
+import { useEarthquakes, useEarthquakeDetails } from "../../hooks/useEarthquakes";
 import styles from "./Dashboard.module.css";
-import { MapContainer, TileLayer } from "react-leaflet";
+import MapView from "../../components/MapView/MapView";
 
 export default function Dashboard() {
     const { logout } = useAuth();
     const navigate = useNavigate();
 
-    const { data, isLoading } = useEarthquakes(0, 5);
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+
+    const { data: earthquakes, isLoading } = useEarthquakes(0, 20);
+    const { data: details } = useEarthquakeDetails(selectedId ?? "");
 
     if (isLoading) return <p>Loading...</p>;
-    console.log(data);
 
     // handle logout
     const handleLogout = () => {
@@ -32,16 +35,18 @@ export default function Dashboard() {
                 </button>
             </header>
             <main className={styles.dashboard__main}>
-                <MapContainer
-                    center={[data[0].coordinates.lat, data[0].coordinates.long]}
-                    zoom={10}
-                    className={styles.dashboard__map}
-                >
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                </MapContainer>
+            {selectedId && details && (
+                <aside className={styles.detailsPanel}>
+                    <h2>Earthquake Details</h2>
+                    <p><strong>ID:</strong> {details.id}</p>
+                    <p><strong>Magnitude:</strong> {details.magnitude}</p>
+                    <p><strong>Depth:</strong> {details.depth} km</p>
+                    <p><strong>Location:</strong> {details.location}</p>
+                    <p><strong>Timestamp:</strong> {new Date(details.timestamp).toLocaleString()}</p>
+                </aside>
+            )}
+                <MapView earthquakes={Array.isArray(earthquakes) ? earthquakes : undefined} onSelect={id => setSelectedId(id)} />
+
             </main>
         </div>
     )

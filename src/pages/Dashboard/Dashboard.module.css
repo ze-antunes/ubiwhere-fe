@@ -18,7 +18,3 @@
 .dashboard__main {
   @apply flex-1 w-full;
 }
-
-.dashboard__map {
-  @apply w-full h-full;
-}
