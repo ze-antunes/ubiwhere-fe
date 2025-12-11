@@ -1,0 +1,15 @@
+.login__container {
+  @apply flex items-center justify-center min-h-screen bg-gray-100;
+}
+
+.login__form {
+  @apply flex flex-col gap-4 bg-white p-6 rounded-xl shadow-md w-full max-w-sm;
+}
+
+.login__input {
+  @apply border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.login__button {
+  @apply bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50;
+}
