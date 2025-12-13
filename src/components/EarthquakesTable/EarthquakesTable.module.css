@@ -1,0 +1,31 @@
+.tablePanel {
+  @apply absolute bottom-4 right-4 w-[420px] bg-white rounded-xl shadow-xl p-4 z-50;
+}
+
+.title {
+  @apply font-semibold text-lg mb-3;
+}
+
+.table {
+  @apply w-full text-sm border-collapse;
+}
+
+.table th {
+  @apply text-left text-gray-500 pb-2;
+}
+
+.table td {
+  @apply py-2 border-t;
+}
+
+.row {
+  @apply cursor-pointer hover:bg-gray-100 transition-colors;
+}
+
+.pagination {
+  @apply flex items-center justify-between mt-4;
+}
+
+.pagination button {
+  @apply px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50;
+}

@@ -1,0 +1,19 @@
+.panel {
+  @apply absolute top-4 right-4 z-50 w-80 bg-white rounded-lg shadow-lg p-4;
+}
+
+.panel__header {
+  @apply flex justify-between items-center mb-3;
+}
+
+.panel__title {
+  @apply text-lg font-semibold;
+}
+
+.panel__close {
+  @apply text-gray-500 hover:text-black text-sm;
+}
+
+.panel__content {
+  @apply text-sm space-y-2;
+}

@@ -3,7 +3,7 @@
 }
 
 .dashboard__header {
-  @apply w-full flex justify-between items-center bg-gray-100 p-4 shadow-md;
+  @apply w-full flex justify-between items-center bg-white p-4 shadow-md;
 }
 
 .dashboard__title {
@@ -16,5 +16,5 @@
 }
 
 .dashboard__main {
-  @apply flex-1 w-full;
+  @apply relative flex-1 w-full overflow-hidden;
 }

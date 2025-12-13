@@ -4,13 +4,15 @@ import "leaflet/dist/leaflet.css";
 import styles from "./MapView.module.css";
 import L from "leaflet";
 import MapLegend from "./MapLegend";
+import MapCenterUpdater from "../../helpers/MapCenterUpdater";
 
 interface MapViewProps {
     earthquakes: Earthquake[] | undefined;
+    earthquake: Earthquake | undefined;
     onSelect: (id: string) => void;
 }
 
-export default function MapView({ earthquakes, onSelect }: MapViewProps) {
+export default function MapView({ earthquake, earthquakes, onSelect }: MapViewProps) {
     if (!earthquakes || earthquakes.length === 0) {
         return <div className={styles.map__empty}>No data</div>;
     }
@@ -37,17 +39,17 @@ export default function MapView({ earthquakes, onSelect }: MapViewProps) {
             <MapLegend />
 
             <MapContainer
-                center={[
-                    earthquakes[0].coordinates.lat,
-                    earthquakes[0].coordinates.long,
-                ]}
-                zoom={6}
+                center={[0, 0]}
+                zoom={10}
                 className={styles.map}
             >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; OpenStreetMap contributors"
                 />
+
+                <MapCenterUpdater earthquake={earthquake ?? null}
+                    fallbackEarthquake={earthquakes[0]} />
 
                 {earthquakes.map((eq) => (
                     <Marker
