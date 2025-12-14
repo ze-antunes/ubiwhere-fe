@@ -1,49 +1,32 @@
 .panel {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: fit-content;
-  background: white;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
-  transform: translateY(88%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  @apply fixed bottom-0 left-0 w-full h-fit bg-white
+         rounded-t-2xl shadow-2xl
+         flex flex-col justify-center
+         z-[1000]
+         transition-transform duration-300 ease-in-out
+         translate-y-[88%];
 }
 
 .open {
-  transform: translateY(0%);
+  @apply translate-y-0;
 }
 
 .closed {
-  transform: translateY(100%);
+  @apply translate-y-full;
 }
 
 .handle {
-  padding: 8px;
-  text-align: center;
-  cursor: pointer;
+  @apply p-2 text-center cursor-pointer;
 }
 
 .bar {
-  width: 40px;
-  height: 4px;
-  background: #ccc;
-  border-radius: 2px;
-  margin: 0 auto 6px;
+  @apply w-10 h-1 bg-gray-300 rounded mx-auto mb-1.5;
 }
 
 .title {
-  font-size: 0.85rem;
-  color: #555;
+  @apply text-sm text-gray-600;
 }
 
 .content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 12px;
+  @apply flex-1 overflow-y-auto p-3;
 }

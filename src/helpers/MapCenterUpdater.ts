@@ -7,6 +7,7 @@ interface Props {
   fallbackEarthquake?: Earthquake;
 }
 
+// Component to update the map center based on the selected earthquake
 export default function MapCenterUpdater({
   earthquake,
   fallbackEarthquake

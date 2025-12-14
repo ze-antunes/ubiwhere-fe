@@ -1,73 +1,151 @@
-# React + TypeScript + Vite
+# QuakeWatch 🌍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application developed as part of the **Ubiwhere Frontend Recruitment Exercise**.
 
-Currently, two official plugins are available:
+QuakeWatch is a React + TypeScript application that displays recent earthquake events on an interactive map, allowing authenticated users to explore and inspect detailed earthquake information.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 Authentication
 
-## Expanding the ESLint configuration
+- Login with provided credentials
+- Token-based authentication (Bearer token)
+- Authentication state persisted across page refresh
+- Protected private routes
+- Logout functionality
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🗺️ Dashboard
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Interactive map built with **Leaflet**
+- Earthquakes displayed as clickable markers
+- Marker colors reflect earthquake magnitude
+- Smooth map centering animation when selecting an earthquake
+- Floating legend overlay
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 📊 Data Visualization
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Paginated list of earthquakes (4 earthquakes per page,**up to 5 pages**, as requested in the exercise)
+- Table view with selectable rows
+- Details panel with extended earthquake information
+- Mobile-friendly UI inspired by Google Maps (bottom panels)
+
+### 📱 Responsive Design
+
+- Desktop and mobile layouts
+- Floating panels and overlays
+- Mobile bottom sheet for tables and interactions
+
+---
+
+## 🛠️ Tech Stack
+
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **React Router**
+- **React Query (@tanstack/react-query)**
+- **Axios**
+- **Leaflet / React-Leaflet**
+- **Tailwind CSS + CSS Modules**
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd ubiwhere-fe
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Environment variables
+
+Create a `.env` file at the root of the project:
+
+```env
+VITE_UBIWHERE_API_URL
+```
+
+>[!WARNING]
+>This variable should point to the backend API URL provided for the exercise.
+
+### 4. Run the project
+
+```bash
+npm run dev
+```
+
+The app will be available at:
+
+```plain
+http://localhost:5173
+```
+
+>[!NOTE]
+>Your port may vary. Check the terminal output.
+
+To access the app from another device on the same network:
+
+```bash
+npm run dev -- --host
+```
+
+---
+
+## 🔑 Login
+
+- **Email**
+- **Password**
+
+---
+
+## 📁 Project Structure (Simplified)
+
+```plain
+src/
+├── api/                # Axios configuration
+├── components/         # Reusable UI components
+├── context/            # Authentication context
+├── helpers/            # Map helpers
+├── hooks/              # Custom hooks (e.g., useAuth, useEarthquakes)
+├── pages/              # Application pages
+├── routes/             # Private and public routes configuration
+└── types/              # TypeScript types 
+```
+
+---
+
+## Architecture Decisions
+
+- React Context used for authentication to avoid prop drilling
+- React Query used for server state (pagination, caching, retries)
+- Leaflet chosen for open-source map rendering
+- CSS Modules + Tailwind for scoped and maintainable styling
+- Separation between MapView, DetailsPanel and Table to improve readability and reuse
+
+---
+
+## 📌 Notes
+
+- The project follows clean architecture and separation of responsibilities.
+- Focus was placed on clarity, maintainability, and real-world usability.
+- UI is functional and production-ready.
+
+---
+
+## 👤 Author
+
+José Pedro Antunes
+
+---
+
+Thank you for reviewing this project 🙌

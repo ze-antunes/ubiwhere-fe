@@ -17,9 +17,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+    const isLoginRequest = error.config?.url?.includes("/token");
 
+    // If we receive a 401 response and it's not from the login request, redirect to login
+    if (error.response?.status === 401 && !isLoginRequest) {
+      localStorage.removeItem("token");
       window.location.href = "/login";
     }
 

@@ -11,7 +11,6 @@ export default function MobileBottomPanel({ title,
     isOpen,
     onToggle,
     children, }: Props) {
-    // const [open, setOpen] = useState(false);
 
     return (
         <div className={`${styles.panel} ${isOpen ? styles.open : styles.close}`}>

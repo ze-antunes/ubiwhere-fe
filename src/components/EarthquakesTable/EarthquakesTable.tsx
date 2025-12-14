@@ -5,6 +5,7 @@ interface Props {
     earthquakes: Earthquake[];
     currentPage: number;
     totalPages: number;
+    selectedId?: string | null;
     onSelect: (id: string) => void;
     onPageChange: (page: number) => void;
 }
@@ -13,6 +14,7 @@ export default function EarthquakesTable({
     earthquakes,
     currentPage,
     totalPages,
+    selectedId,
     onSelect,
     onPageChange,
 }: Props) {
@@ -34,7 +36,8 @@ export default function EarthquakesTable({
                         <tr
                             key={eq.id}
                             onClick={() => onSelect(eq.id)}
-                            className={styles.row}
+                            className={`${styles.row} ${selectedId === eq.id ? styles.rowActive : ""
+                                }`}
                         >
                             <td>
                                 <span
@@ -44,9 +47,7 @@ export default function EarthquakesTable({
                             </td>
                             <td>{eq.id}</td>
                             <td>{eq.location}</td>
-                            <td>
-                                {new Date(eq.timestamp).toLocaleDateString()}
-                            </td>
+                            <td>{new Date(eq.timestamp).toLocaleDateString()}</td>
                         </tr>
                     ))}
                 </tbody>

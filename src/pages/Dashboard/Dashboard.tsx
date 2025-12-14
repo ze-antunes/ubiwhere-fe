@@ -11,21 +11,26 @@ import MapView from "../../components/MapView/MapView";
 import DetailsPanel from "../../components/DetailsPanel/DetailsPanel";
 import EarthquakesTable from "../../components/EarthquakesTable/EarthquakesTable";
 import MobileBottomPanel from "../../components/MobileBottomPanel/MobileBottomPanel";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 
 export default function Dashboard() {
     const { logout } = useAuth();
     const navigate = useNavigate();
 
+    // State variables
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const [isTableOpen, setIsTableOpen] = useState(true);
 
-    const PAGE_SIZE = 4;
+    // Number of earthquakes per page
+    const PAGE_SIZE = 5;
 
+    // Fetch earthquakes and details
     const { data: earthquakes, isLoading } = useEarthquakes(currentPage, PAGE_SIZE);
     const { data: details } = useEarthquakeDetails(selectedId ?? "");
 
+    // Automatically select the first earthquake when the list changes
     useEffect(() => {
         if (earthquakes && earthquakes.length > 0) {
             setSelectedId(earthquakes[0].id);
@@ -33,8 +38,7 @@ export default function Dashboard() {
         }
     }, [earthquakes, setSelectedId, setIsPanelOpen]);
 
-    if (isLoading) return <p>Loading...</p>;
-
+    // Handlers
     const handleLogout = () => {
         logout();
         navigate("/login");
@@ -71,11 +75,13 @@ export default function Dashboard() {
             </header>
 
             <main className={styles.dashboard__main}>
+                {isLoading && <LoadingScreen />}
                 <div className={styles.desktopOnly}>
                     <EarthquakesTable
                         earthquakes={earthquakes ?? []}
                         currentPage={currentPage}
                         totalPages={5}
+                        selectedId={selectedId}
                         onSelect={id => setSelectedId(id)}
                         onPageChange={handlePageChange}
                     />
@@ -102,6 +108,7 @@ export default function Dashboard() {
                             earthquakes={earthquakes ?? []}
                             currentPage={currentPage}
                             totalPages={5}
+                            selectedId={selectedId}
                             onSelect={handleSelectEarthquake}
                             onPageChange={setCurrentPage}
                         />
