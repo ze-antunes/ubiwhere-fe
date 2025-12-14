@@ -4,6 +4,8 @@ Frontend application developed as part of the **Ubiwhere Frontend Recruitment Ex
 
 QuakeWatch is a React + TypeScript application that displays recent earthquake events on an interactive map, allowing authenticated users to explore and inspect detailed earthquake information.
 
+Deployed version: [QuakeWatch on Vercel](https://ubi-quakewatch.vercel.app/)
+
 ---
 
 ## ✨ Features
