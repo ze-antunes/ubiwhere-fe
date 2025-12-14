@@ -13,3 +13,9 @@
 .login__button {
   @apply bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50;
 }
+
+@media (max-width: 767px) {
+  .login__form {
+    @apply w-11/12;
+  }
+}

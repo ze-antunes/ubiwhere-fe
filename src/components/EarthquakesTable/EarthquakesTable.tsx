@@ -16,7 +16,6 @@ export default function EarthquakesTable({
     onSelect,
     onPageChange,
 }: Props) {
-
     return (
         <div className={styles.tablePanel}>
             <h3 className={styles.title}>Earthquakes</h3>
@@ -24,8 +23,10 @@ export default function EarthquakesTable({
             <table className={styles.table}>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Location</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +36,17 @@ export default function EarthquakesTable({
                             onClick={() => onSelect(eq.id)}
                             className={styles.row}
                         >
+                            <td>
+                                <span
+                                    className={styles.colorDot}
+                                    style={{ backgroundColor: eq.color }}
+                                />
+                            </td>
                             <td>{eq.id}</td>
                             <td>{eq.location}</td>
+                            <td>
+                                {new Date(eq.timestamp).toLocaleDateString()}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

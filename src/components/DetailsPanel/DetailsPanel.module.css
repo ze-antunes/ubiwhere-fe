@@ -17,3 +17,9 @@
 .panel__content {
   @apply text-sm space-y-2;
 }
+
+@media (max-width: 767px) {
+  .panel {
+    @apply top-auto bottom-16 left-4 right-4 w-auto;
+  }
+}

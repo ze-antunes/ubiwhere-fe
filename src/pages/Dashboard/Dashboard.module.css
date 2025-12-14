@@ -18,3 +18,23 @@
 .dashboard__main {
   @apply relative flex-1 w-full overflow-hidden;
 }
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktopOnly {
+    display: none;
+  }
+}

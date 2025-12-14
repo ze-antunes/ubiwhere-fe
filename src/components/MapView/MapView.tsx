@@ -40,7 +40,7 @@ export default function MapView({ earthquake, earthquakes, onSelect }: MapViewPr
 
             <MapContainer
                 center={[0, 0]}
-                zoom={10}
+                zoom={14}
                 className={styles.map}
             >
                 <TileLayer

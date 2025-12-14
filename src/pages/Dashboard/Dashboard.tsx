@@ -10,6 +10,7 @@ import styles from "./Dashboard.module.css";
 import MapView from "../../components/MapView/MapView";
 import DetailsPanel from "../../components/DetailsPanel/DetailsPanel";
 import EarthquakesTable from "../../components/EarthquakesTable/EarthquakesTable";
+import MobileBottomPanel from "../../components/MobileBottomPanel/MobileBottomPanel";
 
 export default function Dashboard() {
     const { logout } = useAuth();
@@ -18,6 +19,7 @@ export default function Dashboard() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [isTableOpen, setIsTableOpen] = useState(true);
 
     const PAGE_SIZE = 4;
 
@@ -38,9 +40,16 @@ export default function Dashboard() {
         navigate("/login");
     };
 
+    const handleSelectMap = (id: string) => {
+        setSelectedId(id);
+        setIsPanelOpen(true);
+        setIsTableOpen(false);
+    };
+
     const handleSelectEarthquake = (id: string) => {
         setSelectedId(id);
         setIsPanelOpen(true);
+        setIsTableOpen(false);
     };
 
     const handlePageChange = (page: number) => {
@@ -62,13 +71,15 @@ export default function Dashboard() {
             </header>
 
             <main className={styles.dashboard__main}>
-                <EarthquakesTable
-                    earthquakes={earthquakes ?? []}
-                    currentPage={currentPage}
-                    totalPages={5}
-                    onSelect={id => setSelectedId(id)}
-                    onPageChange={handlePageChange}
-                />
+                <div className={styles.desktopOnly}>
+                    <EarthquakesTable
+                        earthquakes={earthquakes ?? []}
+                        currentPage={currentPage}
+                        totalPages={5}
+                        onSelect={id => setSelectedId(id)}
+                        onPageChange={handlePageChange}
+                    />
+                </div>
 
                 {details && (
                     <DetailsPanel
@@ -81,8 +92,21 @@ export default function Dashboard() {
                 <MapView
                     earthquake={details}
                     earthquakes={Array.isArray(earthquakes) ? earthquakes : undefined}
-                    onSelect={handleSelectEarthquake}
+                    onSelect={handleSelectMap}
                 />
+
+                <div className={styles.mobileOnly}>
+                    <MobileBottomPanel title="Earthquakes" isOpen={isTableOpen}
+                        onToggle={() => setIsTableOpen(prev => !prev)}>
+                        <EarthquakesTable
+                            earthquakes={earthquakes ?? []}
+                            currentPage={currentPage}
+                            totalPages={5}
+                            onSelect={handleSelectEarthquake}
+                            onPageChange={setCurrentPage}
+                        />
+                    </MobileBottomPanel>
+                </div>
             </main>
         </div>
     );

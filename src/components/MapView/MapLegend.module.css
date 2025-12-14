@@ -1,12 +1,14 @@
 .legend {
-  @apply absolute bottom-4 left-4 z-10 bg-white/90 backdrop-blur
-         rounded-lg shadow-lg p-3 text-sm;
+  @apply absolute z-20 bg-white/90 backdrop-blur
+         rounded-xl shadow-lg p-3 text-sm;
 }
 
+/* Header */
 .legend__title {
   @apply font-semibold mb-2;
 }
 
+/* List */
 .legend__list {
   @apply flex flex-col gap-2;
 }
@@ -29,4 +31,23 @@
 
 .red {
   @apply bg-red-600;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  .legend {
+    @apply bottom-4 left-4 w-auto;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .legend {
+    @apply top-2 right-2;
+    width: fit-content;
+  }
+
+  .legend__list {
+  @apply flex flex-row gap-2;
+}
 }

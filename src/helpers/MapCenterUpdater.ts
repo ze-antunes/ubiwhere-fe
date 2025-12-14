@@ -18,7 +18,7 @@ export default function MapCenterUpdater({
 
     if (!target) return;
 
-    map.flyTo([target.coordinates.lat, target.coordinates.long], 10, {
+    map.flyTo([target.coordinates.lat, target.coordinates.long], 14, {
       duration: 1
     });
   }, [earthquake, fallbackEarthquake, map]);
